@@ -1,26 +1,44 @@
-import React from 'react';
-import logo from './logo.svg';
+import React, {useState} from 'react';
 import './App.css';
+import {Counter} from "./Counter";
+import {Button} from "./Buttons";
 
 function App() {
+  const [count, setCount] = useState(0)
+  const maxValue = 5
+  const minValue = 0
+  const Increment = () => {
+    if (count < maxValue) {
+      setCount(count + 1)
+    }
+  }
+  const Reset = () => {
+    setCount(minValue)
+  }
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+      <div className="App">
+        <div className='counter'>
+          <Counter
+              count={count}
+              maxValue={maxValue}
+          />
+        </div>
+        <div className='button'>
+          <Button
+              name='increment'
+              Increment={Increment}
+              maxValue={maxValue}
+              count={count}
+          />
+          <Button
+              name='reset'
+              Reset={Reset}
+              minValue={minValue}
+              count={count}
+          />
+        </div>
+      </div>
+  )
 }
 
 export default App;
