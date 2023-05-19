@@ -3,32 +3,24 @@ import {FC} from "react";
 
 type PropsType = {
     name: string
-    Increment?: () => void
-    Reset?: () => void
-    minValue?: number
-    maxValue?: number
-    count: number
+    count?: number
+    disabled?: boolean
+    OnClickHandler?: () => void
+    buttonClasses?: string
 }
 export const Button: FC<PropsType> = (
     {
         name,
-        Increment,
-        Reset,
-        minValue,
-        maxValue,
-        count
-    }) => {
-    const OnClickHandler = () => {
-        Increment && Increment()
-        Reset && Reset()
+        disabled,
+        OnClickHandler,
+        buttonClasses
     }
+) => {
 
     return (
         <button
-            disabled={
-                maxValue === count || minValue === count
-            }
-            className='button'
+            disabled={disabled}
+            className={buttonClasses ? buttonClasses : 'button'}
             onClick={OnClickHandler}
         >{name}</button>
     )

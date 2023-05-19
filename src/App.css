@@ -13,3 +13,20 @@
 .button{
   margin-bottom: 10px;
 }
+.setter {
+  display: flex;
+}
+
+.setter input {
+  width: 30px;
+}
+.count {
+  margin-top: 15px;
+  margin-bottom: 20px;
+}
+.error {
+  margin-top: 15px;
+  margin-bottom: 20px;
+  color: red;
+  font-size: 20px;
+}
