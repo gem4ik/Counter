@@ -1,12 +1,14 @@
-import React, {useState} from 'react';
+import React, {ChangeEvent, useState} from 'react';
 import './App.css';
 import {Button} from "./Buttons";
 
 function App() {
-    const [count, setCount] = useState<number>(0)
+    const savedMaxValue = JSON.parse(localStorage.getItem('maxValue') ?? '')
+    const savedMinValue = JSON.parse(localStorage.getItem('minValue') ?? '')
+    const [count, setCount] = useState<any>(savedMinValue)
     const [collapsed, setCollapsed] = useState<boolean>(true)
-    const minValue = 0
-    const maxValue = 5
+    const [maxValue, setMaxValue] = useState<number>(savedMaxValue)
+    const [minValue, setMinValue] = useState<number>(savedMinValue)
 
     const Increment = () => {
         count < maxValue ? setCount(count + 1) : setCount(count)
@@ -17,7 +19,18 @@ function App() {
     const ShowSetter = () => {
         setCollapsed(!collapsed)
     }
-
+    const OnChangeMaxHandler = (e: ChangeEvent<HTMLInputElement>) => {
+        setMaxValue(e.currentTarget.valueAsNumber)
+    }
+    const OnChangeMinHandler = (e: ChangeEvent<HTMLInputElement>) => {
+        setMinValue(e.currentTarget.valueAsNumber)
+    }
+    const MaxValueSetter = () => {
+        localStorage.setItem('maxValue', JSON.stringify(maxValue))
+    }
+    const MinValueSetter = () => {
+        localStorage.setItem('minValue', JSON.stringify(minValue))
+    }
     return (
         <div className="App">
             <div className='counter'>
@@ -27,12 +40,12 @@ function App() {
             </div>
             <div className='button'>
                 <Button
-                    disabled = {maxValue === count}
+                    disabled={maxValue === count}
                     name='increment'
                     OnClickHandler={Increment}
                 />
                 <Button
-                    disabled = {minValue === count}
+                    disabled={minValue === count}
                     name='reset'
                     OnClickHandler={Reset}
                 />
@@ -45,12 +58,19 @@ function App() {
             <div className='setter'>
                 {collapsed || <div className='setter'>
                     <div>
-                        <input type='number'/>
-                        <Button name={'max Value'} count={0}/>
+                        <input type='number'
+                               onChange={OnChangeMaxHandler}
+                        />
+                        <Button
+                            OnClickHandler={MaxValueSetter}
+                            name={'max Value'}/>
                     </div>
                     <div>
-                        <input type='number'/>
-                        <Button name={'min Value'} count={0}/>
+                        <input type='number'
+                               onChange={OnChangeMinHandler}/>
+                        <Button
+                            OnClickHandler={MinValueSetter}
+                            name={'min Value'}/>
                     </div>
                 </div>}
             </div>
