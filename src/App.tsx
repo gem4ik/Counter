@@ -45,13 +45,12 @@ function App() {
                     OnClickHandler={Increment}
                 />
                 <Button
-                    disabled={minValue === count}
+                    disabled={minValue >= count}
                     name='reset'
                     OnClickHandler={Reset}
                 />
                 <Button
                     name={'set'}
-                    // count={count}
                     OnClickHandler={ShowSetter}
                 />
             </div>
@@ -69,6 +68,8 @@ function App() {
                         <input type='number'
                                onChange={OnChangeMinHandler}/>
                         <Button
+                            buttonClasses={minValue < 0 ? 'buttonError' : ''}
+                            disabled={minValue < 0}
                             OnClickHandler={MinValueSetter}
                             name={'min Value'}/>
                     </div>
