@@ -1,14 +1,13 @@
-import React, {ChangeEvent, useState} from 'react';
+import React, {ChangeEvent, useEffect, useState} from 'react';
 import './App.css';
 import {Button} from "./Buttons";
 
 function App() {
-    const savedMaxValue = JSON.parse(localStorage.getItem('maxValue') ?? '')
-    const savedMinValue = JSON.parse(localStorage.getItem('minValue') ?? '')
-    const [count, setCount] = useState<any>(savedMinValue)
+
     const [collapsed, setCollapsed] = useState<boolean>(true)
-    const [maxValue, setMaxValue] = useState<number>(savedMaxValue)
-    const [minValue, setMinValue] = useState<number>(savedMinValue)
+    const [count, setCount] = useState<number>(0)
+    const [maxValue, setMaxValue] = useState<number>(5)
+    const [minValue, setMinValue] = useState<number>(0)
 
     const Increment = () => {
         count < maxValue ? setCount(count + 1) : setCount(count)
@@ -31,6 +30,21 @@ function App() {
     const MinValueSetter = () => {
         localStorage.setItem('minValue', JSON.stringify(minValue))
     }
+
+    useEffect(() => {
+        const savedMaxValue = localStorage.getItem('maxValue')
+        const savedMinValue = localStorage.getItem('minValue')
+
+        if(savedMinValue) {
+            setCount(JSON.parse(savedMinValue))
+            setMinValue(JSON.parse(savedMinValue))
+        }
+        if(savedMaxValue) {
+            setMaxValue(JSON.parse(savedMaxValue))
+        }
+
+    }, [])
+
     return (
         <div className="App">
             <div className='counter'>
