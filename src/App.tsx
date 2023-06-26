@@ -16,6 +16,7 @@ function App() {
 
     const dispatch = useDispatch()
     const state = useSelector<ActionType, CounterStateType>(store => store)
+
     const [collapsed, setCollapsed] = useState<boolean>(true)
 
     const Increment = () => {
