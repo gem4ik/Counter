@@ -24,6 +24,7 @@ function App() {
 
     }
     const Reset = () => dispatch(ResetAC())
+
     const OnChangeMaxHandler = (e: ChangeEvent<HTMLInputElement>) => {
         dispatch(OnChangeMaxHandlerAC(e.currentTarget.valueAsNumber))
     }
@@ -33,8 +34,7 @@ function App() {
 
     const MaxValueSetter = () => localStorage.setItem('maxValue', JSON.stringify(state.maxValue))
     const MinValueSetter = () => localStorage.setItem('minValue', JSON.stringify(state.minValue))
-
-
+    
     useEffect(() => {
         const savedCount = localStorage.getItem('count');
         if (savedCount !== null) {
