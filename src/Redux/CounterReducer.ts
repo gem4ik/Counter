@@ -4,18 +4,18 @@ export type initialStateType = {
     maxValue: number
 }
 export const initialState = {
-    counter: Number(localStorage.getItem('Counter'))||Number(localStorage.getItem('StartValue'))||0,
-    minValue: Number(localStorage.getItem('StartValue'))||0,
-    maxValue: Number(localStorage.getItem('MaxValue'))||5,
+    counter: Number(localStorage.getItem('Counter')) || Number(localStorage.getItem('StartValue')) || 0,
+    minValue: Number(localStorage.getItem('StartValue')) || 0,
+    maxValue: Number(localStorage.getItem('MaxValue')) || 5,
 }
 
 export type CounterReducerType = ReturnType<typeof counterReducer>
 export const counterReducer = (state: initialStateType = initialState, action: MainType): initialStateType => {
     switch (action.type) {
-        case "INCREMENT": {
+        case "INCRЕMENT": {
             return {...state, counter: state.counter + 1}
         }
-        case "RESET": {
+        case "RESЕT": {
             return {...state, counter: state.minValue}
         }
         case "SET-START-VALUE": {
@@ -25,6 +25,9 @@ export const counterReducer = (state: initialStateType = initialState, action: M
             return {...state, maxValue: action.payload.newValue}
         }
         case "SET-TO-START": {
+            if (state.counter <= state.minValue) {
+                state.counter = state.minValue
+            }
             localStorage.setItem('StartValue', JSON.stringify(state.minValue))
             localStorage.setItem('MaxValue', JSON.stringify(state.maxValue))
             return state
@@ -48,13 +51,13 @@ export type MainType = IncrementACType
 export type IncrementACType = ReturnType<typeof incrementAC>
 export const incrementAC = () => {
     return {
-        type: "INCREMENT"
+        type: "INCRЕMENT"
     } as const
 }
 export type resetACType = ReturnType<typeof resetAC>
 export const resetAC = () => {
     return {
-        type: "RESET"
+        type: "RESЕT"
     } as const
 }
 export type StartValueACType = ReturnType<typeof StartValueAC>
@@ -69,7 +72,7 @@ export const MaxValueAC = (newValue: number) => {
     return {
         type: "SET-MAX-VALUE",
         payload: {newValue}
-    } as const
+    }
 }
 export type LSSetValueACType = ReturnType<typeof LSSetValueAC>
 export const LSSetValueAC = () => {

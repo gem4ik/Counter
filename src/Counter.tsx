@@ -14,6 +14,7 @@ export const Counter = () => {
     }
     const resetButtonHandler = () => {
         dispatch(resetAC())
+        dispatch(LSSetCounterAC())
     }
 
     return (
