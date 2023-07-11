@@ -22,7 +22,6 @@ export const SuperInput: React.FC<SuperInputPropsType> = ({
     const onKeyDownHandler = (e: KeyboardEvent<HTMLInputElement>) => {
         onKeyDownCallBack && onKeyDownCallBack(e.key)
     }
-
     return (
         <input type={"number"} value={superInputValue} onChange={onChangeHandler} onKeyDown={onKeyDownHandler}/>
     );

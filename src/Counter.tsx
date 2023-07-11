@@ -1,6 +1,6 @@
 import React from 'react';
 import {useDispatch, useSelector} from "react-redux";
-import {CounterReducerType, incrementAC, initialStateType, resetAC} from "./Redux/CounterReducer";
+import {CounterReducerType, incrementAC, initialStateType, LSSetCounterAC, resetAC} from "./Redux/CounterReducer";
 import {SuperButton} from "./SuperButton";
 
 export const Counter = () => {
@@ -10,8 +10,8 @@ export const Counter = () => {
 
     const incrementButtonHandler = () => {
         dispatch(incrementAC())
+        dispatch(LSSetCounterAC())
     }
-
     const resetButtonHandler = () => {
         dispatch(resetAC())
     }
@@ -21,16 +21,18 @@ export const Counter = () => {
             <div>
                 {state.counter}
             </div>
-            <SuperButton
-                callBack={incrementButtonHandler}
-                name={"inc"}
-                disable={state.counter>=state.maxValue}
-            />
-            <SuperButton
-                callBack={resetButtonHandler}
-                name={'res'}
-                disable={state.counter<=state.minValue}
-            />
+            <div>
+                <SuperButton
+                    callBack={incrementButtonHandler}
+                    name={"inc"}
+                    disable={state.counter>=state.maxValue}
+                />
+                <SuperButton
+                    callBack={resetButtonHandler}
+                    name={'res'}
+                    disable={state.counter<=state.minValue}
+                />
+            </div>
         </div>
     );
 };

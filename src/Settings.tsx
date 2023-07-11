@@ -3,7 +3,6 @@ import {useDispatch, useSelector} from "react-redux";
 import {CounterReducerType, initialStateType, MaxValueAC, StartValueAC} from "./Redux/CounterReducer";
 import {SuperInput} from "./SuperInput";
 
-
 export const Settings = () => {
 
     const dispatch = useDispatch()
