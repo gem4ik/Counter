@@ -72,7 +72,7 @@ export const MaxValueAC = (newValue: number) => {
     return {
         type: "SET-MAX-VALUE",
         payload: {newValue}
-    }
+    } as const
 }
 export type LSSetValueACType = ReturnType<typeof LSSetValueAC>
 export const LSSetValueAC = () => {
